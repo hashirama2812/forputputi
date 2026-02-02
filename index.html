@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>audi<3 💖</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  }
+
+  h1 {
+    color: #b30059;
+    margin-bottom: 20px;
+    animation: float 2s ease-in-out infinite;
+    text-align: center;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .buttons {
+    position: relative;
+    width: 320px;
+    height: 180px;
+  }
+
+  button {
+    padding: 14px 28px;
+    font-size: 20px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    transition: transform 0.2s ease;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+  }
+
+  #yes {
+    left: 30px;
+    background: #ff3366;
+    color: white;
+    animation: bounce 1.5s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  #no {
+    right: 30px;
+    background: #666;
+    color: white;
+  }
+
+  .heart {
+    position: absolute;
+    font-size: 24px;
+    animation: rise 5s linear infinite;
+  }
+
+  @keyframes rise {
+    0% {
+      transform: translateY(100vh);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-10vh);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<h1>audi&lt;3, will you be my Valentine? 💘🥺</h1>
+
+<div class="buttons">
+  <button id="yes">Yes 🥰</button>
+  <button id="no">No 😠</button>
+</div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+
+  let escapeCount = 0;
+
+  noBtn.addEventListener("mouseenter", () => {
+    escapeCount++;
+
+    // cute shake
+    noBtn.style.transform = "rotate(5deg)";
+    setTimeout(() => noBtn.style.transform = "rotate(-5deg)", 50);
+    setTimeout(() => noBtn.style.transform = "rotate(0deg)", 100);
+
+    if (escapeCount >= 5) {
+      noBtn.innerText = "Yes 🥰";
+      noBtn.style.background = "#ff3366";
+      noBtn.style.left = "30px";
+      noBtn.style.right = "auto";
+      return;
+    }
+
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  function celebrate() {
+    document.body.innerHTML = `
+      <h1>YAYYYY audi&lt;3!!! 💖🥳</h1>
+      <h2>You just made me the happiest 😭💕</h2>
+      <h3>Happy Valentine’s Day 💌</h3>
+    `;
+  }
+
+  yesBtn.addEventListener("click", celebrate);
+  noBtn.addEventListener("click", celebrate);
+
+  // floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+</script>
+
+</body>
+</html>
