@@ -13,27 +13,94 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Comic Sans MS', cursive;
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   }
 
   h1 {
     color: #b30059;
-    margin-bottom: 20px;
-    animation: float 2s ease-in-out infinite;
+    margin-bottom: 30px;
     text-align: center;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
   }
 
   .buttons {
     position: relative;
-    width: 320px;
-    height: 180px;
+    width: 400px;
+    height: 200px;
   }
+
+  button {
+    padding: 14px 28px;
+    font-size: 20px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  #yes {
+    left: 60px;
+    top: 80px;
+    background: #ff3366;
+    color: white;
+  }
+
+  #no {
+    left: 220px;
+    top: 80px;
+    background: #555;
+    color: white;
+    transition: 0.15s;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>audi&lt;3, will you be my Valentine? 💘🥺</h1>
+
+<div class="buttons" id="box">
+  <button id="yes">Yes 🥰</button>
+  <button id="no">No 😠</button>
+</div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const box = document.getElementById("box");
+
+  let escapes = 0;
+
+  box.addEventListener("mousemove", (e) => {
+    const btnRect = noBtn.getBoundingClientRect();
+    const boxRect = box.getBoundingClientRect();
+
+    const btnX = btnRect.left + btnRect.width / 2;
+    const btnY = btnRect.top + btnRect.height / 2;
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    const distX = mouseX - btnX;
+    const distY = mouseY - btnY;
+    const distance = Math.sqrt(distX ** 2 + distY ** 2);
+
+    if (distance < 100) {
+      escapes++;
+
+      let moveX = -distX * 0.6;
+      let moveY = -distY * 0.6;
+
+      let newLeft = noBtn.offsetLeft + moveX;
+      let newTop = noBtn.offsetTop + moveY;
+
+      // boundaries
+      const maxX = box.clientWidth - noBtn.offsetWidth;
+      const maxY = box.clientHeight - noBtn.offsetHeight;
+
+      newLeft = Math.max(0, Math.min(maxX, newLeft));
+      newTop = Math.max(0, Math.min(maxY, newTop));
+
+      noBtn.style
 
   button {
     padding: 14px 28px;
@@ -149,3 +216,4 @@
 
 </body>
 </html>
+
