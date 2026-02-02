@@ -1,117 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>audi<3 💖</title>
+  <meta charset="UTF-8">
+  <title>audi&lt;3 💖</title>
 
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Comic Sans MS', cursive;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  }
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
 
-  h1 {
-    color: #b30059;
-    margin-bottom: 30px;
-    text-align: center;
-  }
+    h1 {
+      color: #b30059;
+      margin-bottom: 30px;
+      text-align: center;
+    }
 
-  .buttons {
-    position: relative;
-    width: 420px;
-    height: 220px;
-    border-radius: 20px;
-  }
+    .buttons {
+      position: relative;
+      width: 420px;
+      height: 220px;
+    }
 
-  button {
-    padding: 14px 28px;
-    font-size: 20px;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-  }
+    button {
+      padding: 14px 28px;
+      font-size: 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+    }
 
-  #yes {
-    left: 70px;
-    top: 90px;
-    background: #ff3366;
-    color: white;
-  }
+    #yes {
+      left: 70px;
+      top: 90px;
+      background: #ff3366;
+      color: white;
+    }
 
-  #no {
-    left: 260px;
-    top: 90px;
-    background: #555;
-    color: white;
-    transition: left 0.08s linear, top 0.08s linear;
-  }
-</style>
+    #no {
+      left: 260px;
+      top: 90px;
+      background: #666;
+      color: white;
+      transition: left 0.1s linear, top 0.1s linear;
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>audi&lt;3, will you be my Valentine? 💘🥺</h1>
+  <h1>audi&lt;3, will you be my Valentine? 💘🥺</h1>
 
-<div class="buttons" id="box">
-  <button id="yes">Yes 🥰</button>
-  <button id="no">No 😠</button>
-</div>
+  <div class="buttons" id="box">
+    <button id="yes">Yes 🥰</button>
+    <button id="no">No 😠</button>
+  </div>
 
-<script>
-  const noBtn = document.getElementById("no");
-  const box = document.getElementById("box");
+  <script>
+    const noBtn = document.getElementById("no");
+    const box = document.getElementById("box");
 
-  let escapes = 0;
+    let escapes = 0;
+    const RADIUS = 50;
 
-  box.addEventListener("mousemove", (e) => {
-    const btnRect = noBtn.getBoundingClientRect();
-    const boxRect = box.getBoundingClientRect();
+    box.addEventListener("mousemove", (e) => {
+      const btnRect = noBtn.getBoundingClientRect();
+      const boxRect = box.getBoundingClientRect();
 
-    const btnX = btnRect.left + btnRect.width / 2;
-    const btnY = btnRect.top + btnRect.height / 2;
+      const btnX = btnRect.left + btnRect.width / 2;
+      const btnY = btnRect.top + btnRect.height / 2;
 
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
 
-    const dx = mouseX - btnX;
-    const dy = mouseY - btnY;
-    const distance = Math.sqrt(dx * dx + dy * dy);
+      const dx = mouseX - btnX;
+      const dy = mouseY - btnY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
 
-    const TRIGGER_RADIUS = 60;
+      if (distance < RADIUS) {
+        escapes++;
 
-    if (distance < TRIGGER_RADIUS) {
-      escapes++;
+        let newLeft = noBtn.offsetLeft - dx * 0.3;
+        let newTop  = noBtn.offsetTop  - dy * 0.3;
 
-      const moveX = -dx * 0.35;
-      const moveY = -dy * 0.35;
+        const maxX = box.clientWidth - noBtn.offsetWidth;
+        const maxY = box.clientHeight - noBtn.offsetHeight;
 
-      let newLeft = noBtn.offsetLeft + moveX;
-      let newTop = noBtn.offsetTop + moveY;
+        newLeft = Math.max(0, Math.min(maxX, newLeft));
+        newTop  = Math.max(0, Math.min(maxY, newTop));
 
-      const maxX = box.clientWidth - noBtn.offsetWidth;
-      const maxY = box.clientHeight - noBtn.offsetHeight;
+        noBtn.style.left = newLeft + "px";
+        noBtn.style.top  = newTop + "px";
 
-      newLeft = Math.max(0, Math.min(maxX, newLeft));
-      newTop = Math.max(0, Math.min(maxY, newTop));
-
-      noBtn.style.left = newLeft + "px";
-      noBtn.style.top = newTop + "px";
-
-      if (escapes > 25) {
-        noBtn.innerText = "Yes 🥰";
-        noBtn.style.background = "#ff3366";
+        if (escapes > 25) {
+          noBtn.textContent = "Yes 🥰";
+          noBtn.style.background = "#ff3366";
+        }
       }
-    }
-  });
-</script>
+    });
+
+    document.getElementById("yes").onclick = () => {
+      document.body.innerHTML = "<h1>YAYYYY audi&lt;3 💖🥳</h1>";
+    };
+
+    noBtn.onclick = () => {
+      document.body.innerHTML = "<h1>YAYYYY audi&lt;3 💖🥳</h1>";
+    };
+  </script>
 
 </body>
 </html>
